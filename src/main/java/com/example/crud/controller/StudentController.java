@@ -2,6 +2,8 @@ package com.example.crud.controller;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
+import com.example.crud.model.Post;
 import com.example.crud.model.Student;
 import com.example.crud.repository.StudentRepository;
 import reactor.core.publisher.Mono;
@@ -36,7 +38,7 @@ public class StudentController {
     }
 
     @GetMapping("/external-data")
-    public Mono<String> getExternalData() {
+    public Mono<Post> getExternalData() {
         return clientService.getExampleData();
     }
 
