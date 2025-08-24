@@ -4,14 +4,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import com.example.crud.model.Student;
 import com.example.crud.repository.StudentRepository;
+import reactor.core.publisher.Mono;
+import com.example.crud.service.StudentClientService;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
     private final StudentRepository repo;
+    private final StudentClientService clientService; 
 
-    public StudentController(StudentRepository repo) {
+    public StudentController(StudentRepository repo,StudentClientService clientService) {
         this.repo = repo;
+        this.clientService = clientService;
     }
 
     @GetMapping("/hello")
@@ -30,6 +34,12 @@ public class StudentController {
         return repo.findById(id)
             .orElseThrow(() -> new RuntimeException("Student not found with id " + id));
     }
+
+    @GetMapping("/external-data")
+    public Mono<String> getExternalData() {
+        return clientService.getExampleData();
+    }
+
     
     @PostMapping
     public Student createStudent(@RequestBody Student student) {
