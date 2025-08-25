@@ -2,11 +2,8 @@ package com.example.crud.controller;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-import com.example.crud.model.Post;
 import com.example.crud.model.Student;
 import com.example.crud.repository.StudentRepository;
-import reactor.core.publisher.Mono;
 import com.example.crud.service.StudentClientService;
 
 @RestController
@@ -25,21 +22,24 @@ public class StudentController {
         return "Hello World!";
     }
 
+    // @GetMapping
+    // public List<Student> getAllStudents() {
+    //     System.out.println(repo.findAll());
+    //     return repo.findAll();
+    // }
     @GetMapping
-    public List<Student> getAllStudents() {
-        System.out.println(repo.findAll());
+    public List<Student> getAllStudents(@RequestParam(value = "search", required = false) String search) {
+        if (search != null && !search.isEmpty()) {
+            return repo.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(search, search);
+        }
         return repo.findAll();
     }
+
 
     @GetMapping("/{id}")
     public Student getStudentById(@PathVariable Long id) {
         return repo.findById(id)
             .orElseThrow(() -> new RuntimeException("Student not found with id " + id));
-    }
-
-    @GetMapping("/external-data")
-    public Mono<Post> getExternalData() {
-        return clientService.getExampleData();
     }
 
     
