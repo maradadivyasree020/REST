@@ -16,14 +16,10 @@ public class StudentController {
 
     @GetMapping("/hello")
     public String hello() {
+        System.out.println("Hello World endpoint hit");    
         return "Hello World!";
     }
 
-    // @GetMapping
-    // public List<Student> getAllStudents() {
-    //     System.out.println(repo.findAll());
-    //     return repo.findAll();
-    // }
     @GetMapping
     public List<Student> getAllStudents(@RequestParam(value = "search", required = false) String search) {
         if (search != null && !search.isEmpty()) {

@@ -14,6 +14,9 @@ public class Student {
     private String name;
     private String email;
 
+    public Student(long l, String string, String string2) {
+        //TODO Auto-generated constructor stub
+    }
     public Long getId() {
         return id;
     }
