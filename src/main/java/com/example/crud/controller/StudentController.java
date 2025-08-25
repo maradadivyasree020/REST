@@ -4,17 +4,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import com.example.crud.model.Student;
 import com.example.crud.repository.StudentRepository;
-import com.example.crud.service.StudentClientService;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
     private final StudentRepository repo;
-    private final StudentClientService clientService; 
 
-    public StudentController(StudentRepository repo,StudentClientService clientService) {
+    public StudentController(StudentRepository repo) {
         this.repo = repo;
-        this.clientService = clientService;
     }
 
     @GetMapping("/hello")
