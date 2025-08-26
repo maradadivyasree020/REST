@@ -14,13 +14,13 @@ public class StudentController {
         this.repo = repo;
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/hello") //done -test
     public String hello() {
         System.out.println("Hello World endpoint hit");    
         return "Hello World!";
     }
 
-    @GetMapping
+    @GetMapping //done -test
     public List<Student> getAllStudents(@RequestParam(value = "search", required = false) String search) {
         if (search != null && !search.isEmpty()) {
             return repo.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(search, search);
@@ -36,7 +36,7 @@ public class StudentController {
     }
 
     
-    @PostMapping
+    @PostMapping //done -test
     public Student createStudent(@RequestBody Student student) {
         System.out.println(student);
         return repo.save(student);

@@ -20,6 +20,10 @@ public class AgePredictionController {
 
     @GetMapping
     public Mono<AgePrediction> getAgePrediction(@RequestParam String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return Mono.error(new IllegalArgumentException("Name parameter is required"));
+        }
         return service.predictAge(name);
     }
+
 }
