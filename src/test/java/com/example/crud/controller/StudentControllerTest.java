@@ -25,7 +25,7 @@ import com.example.crud.model.Student;
 import com.example.crud.repository.StudentRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.reactive.function.client.WebClient;
+// import org.springframework.web.reactive.function.client.WebClient;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
@@ -48,8 +48,8 @@ public class StudentControllerTest {
     private StudentRepository repo;
 
     // Mock WebClient.Builder bean to avoid ApplicationContext loading errors
-    @MockBean
-    private WebClient.Builder webClientBuilder;
+    // @MockBean
+    // private WebClient.Builder webClientBuilder;
 
     @Test //hello function
     public void hello() throws Exception {

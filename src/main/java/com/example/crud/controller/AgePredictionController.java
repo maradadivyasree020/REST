@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
+// import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/age-prediction")
@@ -19,10 +19,7 @@ public class AgePredictionController {
     }
 
     @GetMapping
-    public Mono<AgePrediction> getAgePrediction(@RequestParam String name) {
-        if (name == null || name.trim().isEmpty()) {
-            return Mono.error(new IllegalArgumentException("Name parameter is required"));
-        }
+    public AgePrediction getAgePrediction(@RequestParam String name) {
         return service.predictAge(name);
     }
 
