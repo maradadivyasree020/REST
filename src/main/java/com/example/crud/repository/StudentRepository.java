@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.crud.model.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
-
-    List<Student> findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(String search, String search2); }
+    List<Student> findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(String search, String search2); 
+}

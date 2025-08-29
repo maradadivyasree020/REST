@@ -29,9 +29,4 @@ public class CrudApplication {
         };
     }
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
 }

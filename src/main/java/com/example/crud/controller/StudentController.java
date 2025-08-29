@@ -1,9 +1,13 @@
 package com.example.crud.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
+
 import com.example.crud.model.Student;
 import com.example.crud.repository.StudentRepository;
+import com.example.crud.service.StudentService;
 
 @RestController
 @RequestMapping("/students")
@@ -14,6 +18,9 @@ public class StudentController {
         this.repo = repo;
     }
 
+    @Autowired
+    private StudentService service;
+
     @GetMapping("/hello") //done -test
     public String hello() {
         System.out.println("Hello World endpoint hit");    
@@ -22,36 +29,29 @@ public class StudentController {
 
     @GetMapping //done -test
     public List<Student> getAllStudents(@RequestParam(value = "search", required = false) String search) {
-        if (search != null && !search.isEmpty()) {
-            return repo.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(search, search);
-        }
-        return repo.findAll();
+        return service.getAllStudents(search);
     }
 
 
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable Long id) {
-        return repo.findById(id)
-            .orElseThrow(() -> new RuntimeException("Student not found with id " + id));
+    public Optional<Student> getStudent(@PathVariable Long id) {
+        System.out.println(id);
+        return service.getStudent(id);
     }
 
     
     @PostMapping //done -test
     public Student createStudent(@RequestBody Student student) {
-        System.out.println(student);
-        return repo.save(student);
+        return service.createStudent(student);
     }
 
     @PutMapping("/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
-        Student student = repo.findById(id).orElseThrow();
-        student.setName(studentDetails.getName());
-        student.setEmail(studentDetails.getEmail());
-        return repo.save(student);
+       return service.updateStudent(id,studentDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable Long id) {
-        repo.deleteById(id);
+        service.deleteStudent(id);
     }
 }
